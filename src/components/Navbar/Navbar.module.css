@@ -1,0 +1,380 @@
+.wrapper {
+  margin: 0 auto;
+  height: 80px;
+  max-width: 1440px;
+  position: relative;
+}
+.header {
+  min-height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+.goBack {
+  width: 31px;
+  height: 30px;
+}
+
+.nav {
+  display: flex;
+  margin-top: 0;
+  padding: 0 0;
+  justify-content: center;
+  list-style-type: none;
+}
+
+.nav > li:first-child {
+  width: 100px;
+}
+.nav > li:nth-child(2) {
+  width: 70px;
+}
+.nav > li:nth-child(3) {
+  width: 70px;
+}
+
+.nav > li .category {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  color: #5ece7b;
+  text-decoration: none;
+}
+
+.nav > li .activeLink {
+  border-bottom: 2px solid #5ece7b;
+}
+
+.optionsIcons {
+ display: flex;
+
+}
+.myCard {
+  width: 325px;
+  height: 540px;
+  position: absolute;
+  top: 80px;
+  right: 0;
+  z-index: 3;
+background-color: #FFFFFF;
+}
+.myCard h5 {
+  display: flex;
+  justify-content: flex-start;
+  min-width: 118px;
+  height: 26px;
+  margin-top: 0;
+  padding-top: 0px;
+  margin-bottom: 0;
+  padding-left: 16px;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 160%;
+  text-align: right;
+  color: #1d1f22;
+}
+
+.choosenProducts {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 325px;
+  height: 350px;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 16px;
+  color: #1d1f22;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 45px;
+}
+.leftCard {
+  width: 136px;
+  min-height: 137px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.leftCard p {
+  margin-top: 0;
+}
+.rightCard {
+  display: flex;
+  min-height: 137px;
+  width: 135px;
+  margin-right: 35px;
+}
+
+.addToCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 20px;
+  margin-left: 13px;
+}
+.buttonLeft {
+  width: 140px;
+  height: 43px;
+  background: #ffffff;
+  border: 1px solid #1d1f22;
+  box-sizing: border-box;
+
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  color: #1d1f22;
+  cursor: pointer;
+}
+.buttonLeft__link{
+  text-decoration: none;
+  font-family: Raleway;
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 120%;
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+color: #1D1F22;
+
+
+}
+.buttonRight {
+  width: 140px;
+  height: 43px;
+  background: #5ece7b;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+
+.total{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 16px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.totalSum{
+font-family: Roboto;
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 18px;
+color: #1D1F22;
+}
+.totalAmount{
+  font-family: Roboto;
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 18px;
+color: #1D1F22;
+display: flex;
+}
+.totalAmount img{
+  width: 24px;
+  height: 24px;
+ margin-top: 12px;
+}
+.currency__choose {
+  position: absolute;
+  width: 114px;
+  padding-left: 0;
+  margin-top: 35px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  z-index: 3;
+}
+.currencyList__item {
+  list-style-type: none;
+  margin-bottom: 20px;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  /* identical to box height, or 29px */
+display:flex ;
+  color: #1d1f22;
+}
+.currency{
+  margin-right: 2px;
+}
+.arrowDown{
+  width: 8px;
+  height: 5px;
+  margin-right: 22px;
+  margin-bottom:0px;
+  padding-top: 10px;
+}
+
+.cardIcon{
+position: relative;
+  
+}
+.cardBox{
+  margin-top:5px;
+  cursor: pointer;
+}
+.myBagItem{
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  border-radius: 60px;
+  background-color: #1D1F22;
+  color:#FFFFFF;
+  display: inline-block;
+  text-align: center;
+  margin-top: -5px;
+  padding-top: 0;
+  margin-left: -5px;
+}
+.productInfo{
+ display: flex;
+}
+.productInfo img{
+  height: 24px ;
+  width: 24px ;
+}
+.productInfo p{
+  margin-bottom: 0;
+  font-family: Raleway;
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 160%;
+text-align: right;
+color: #1D1F22;
+}
+.attributes{
+list-style-type: none;
+padding-left: 0;
+}
+.attributes__item__name{
+  margin-bottom: 0;
+  font-family: Raleway;
+font-style: normal;
+font-weight: 300;
+font-size: 16px;
+line-height: 160%;
+display: flex;
+align-items: center;
+color: #1D1F22;
+}
+.attributesValue{
+  display: flex;
+  list-style-type: none;
+  padding-left: 0;
+  flex-wrap: wrap;
+
+}
+.attributesValue__item__swatch{
+  margin-right: 8px;
+  margin-bottom: 15px;
+  margin-right: 12px;
+  margin-bottom: 15px;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #a6a6a6;
+  box-sizing: border-box;
+  
+}
+.attributesValue__item{
+  min-width: 24px;
+  min-height: 24px;
+  margin-right: 8px;
+  margin-bottom: 15px;
+  margin-right: 12px;
+  margin-bottom: 15px;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  border: 1px solid #a6a6a6;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  
+}
+.productName{
+  margin-bottom: 5px;
+  font-family: Raleway;
+font-style: normal;
+font-weight: 300;
+font-size: 16px;
+line-height: 160%;
+display: flex;
+align-items: center;
+color: #1D1F22;
+}
+.galleryPhoto{
+  width: 105px;
+  height: 137px;
+  
+
+  
+ 
+}
+.galleryPhotoWrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.count{
+  display: flex;
+  justify-content: center;
+}
+.choiceOfCurrency{
+  display: flex;
+  cursor: pointer;
+
+}
