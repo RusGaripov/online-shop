@@ -5,7 +5,7 @@ const initialState = {
   quantityArray: [1],
 };
 
-export default (state = initialState, action) => {
+export function cartReducer(state = initialState, action) {
   switch (action.type) {
     case actions.ADD_PRODUCT:
       return { ...state, cart: action.cart };
@@ -16,4 +16,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}

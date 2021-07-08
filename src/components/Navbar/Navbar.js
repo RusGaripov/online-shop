@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
@@ -9,7 +9,13 @@ import minusSquare from "../../images/minusSquare.svg";
 import { connect } from "react-redux";
 import { fetchDataList } from "../../store/actions/categoryListActions";
 import { toggleCartInMenu } from "../../store/actions/toggleCartInMenuActions";
+import { toggleCurrencyMenu } from "../../store/actions/toggleCurrencyMenuActions";
 import { addProduct, addQuantity } from "../../store/actions/cartActions";
+import {
+  getOne,
+  getOneTech,
+  getOneClothes,
+} from "../../store/actions/categoryListActions";
 import { getCurrency } from "../../store/actions/myCurrencyActions";
 import USD from "../../images/USD.png";
 import GBP from "../../images/GBP.png";
@@ -18,7 +24,7 @@ import JPY from "../../images/JPY.png";
 import RUB from "../../images/RUB.png";
 import arrowDown from "../../images/arrowDown.svg";
 
-export class Navbar extends Component {
+export class Navbar extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,6 +35,7 @@ export class Navbar extends Component {
       curSymbols: [USD, GBP, AUD, JPY, RUB],
       counters: [1],
       items: 0,
+      myCur: null,
     };
   }
 
@@ -42,17 +49,20 @@ export class Navbar extends Component {
       this.setState({
         choosenCurrency: this.props.currency,
         counters: this.props.quantityArray,
+        myCur: this.state.curSymbols[this.props.currency],
       });
+    }
+  }
+  componentDidUpdate() {
+    if (this.state.curSymbols[this.props.currency] !== this.state.myCur) {
+      this.recalculateTotalSum();
     }
   }
 
   /*Open and Close my Cart in the Navbar Component */
   handleClick = () => {
-    if (this.state.myCard === true) {
+    if (this.props.openedCart === true) {
       this.props.toggleCartInMenu(false);
-      this.setState({
-        myCard: false,
-      });
     } else {
       let sum = 0;
       for (let i = 0; i < this.props.cart.length; i++) {
@@ -77,20 +87,15 @@ export class Navbar extends Component {
     this.setState({
       items: sum,
     });
-    console.log(this.state.items, sum);
   };
 
   /*Open and Close Currency List in the Navbar Component */
 
   handleClickCurrencyList = () => {
-    if (this.state.currencylistVisibility === true) {
-      this.setState({
-        currencylistVisibility: false,
-      });
+    if (this.props.openedCurrencyList === true) {
+      this.props.toggleCurrencyMenu(false);
     } else {
-      this.setState({
-        currencylistVisibility: true,
-      });
+      this.props.toggleCurrencyMenu(true);
     }
   };
 
@@ -100,6 +105,23 @@ export class Navbar extends Component {
     this.props.getCurrency(e.target.getAttribute("value"));
     this.setState({
       choosenCurrency: e.target.getAttribute("value"),
+    });
+  };
+
+  recalculateTotalSum = () => {
+    let sum = 0;
+    for (let i = 0; i < this.props.cart.length; i++) {
+      if (this.state.counters[i] !== undefined) {
+        sum +=
+          this.props.cart[i].prices[this.props.currency].amount *
+          this.state.counters[i];
+      }
+      if (this.state.counters[i] === undefined) {
+        sum += this.props.cart[i].prices[this.props.currency].amount;
+      }
+    }
+    this.setState({
+      totalSum: sum,
     });
   };
 
@@ -159,7 +181,7 @@ export class Navbar extends Component {
               />
             </div>
 
-            {this.state.currencylistVisibility && (
+            {this.props.openedCurrencyList && (
               <ul className={styles.currency__choose}>
                 {this.state.currencyList.map((cur, index) => (
                   <li
@@ -170,8 +192,8 @@ export class Navbar extends Component {
                   >
                     <img
                       id={index}
-                      style={{ pointerEvents: "none" }}
                       src={this.state.curSymbols[index]}
+                      alt="currencySymbol"
                     />
 
                     {cur}
@@ -181,11 +203,13 @@ export class Navbar extends Component {
             )}
             <div className={styles.cardBox} onClick={this.handleClick}>
               <img className={styles.cardIcon} src={cardIcon} alt="cardIcon" />
-              <p className={styles.myBagItem}>{this.props.cart.length}</p>
+              {this.props.openedCart ? (
+                <p className={styles.myBagItem}>{this.props.cart.length}</p>
+              ) : null}
             </div>
           </div>
         </div>
-        {this.state.myCard && (
+        {this.props.openedCart && (
           <div className={styles.myCard}>
             <h5>
               <span>My Bag </span>, {this.state.items} items
@@ -248,6 +272,33 @@ export class Navbar extends Component {
                         </li>
                       ))}
                     </ul>
+                    <button
+                      className={styles.goToDescription}
+                      onClick={() => {
+                        if (item.all === true) {
+                          this.props.getOne(item.num);
+                          this.props.getOneClothes({});
+                          this.props.getOneTech({});
+                        }
+                        if (item.all === false && item.category === "tech") {
+                          this.props.getOneTech(item.num);
+                          this.props.getOneClothes({});
+                          this.props.getOne({});
+                        }
+                        if (item.all === false && item.category === "clothes") {
+                          this.props.getOneClothes(item.num);
+                          this.props.getOneTech({});
+                          this.props.getOne({});
+                        }
+                      }}
+                    >
+                      <Link
+                        className={styles.goToDescription__content}
+                        to={`/one/${item.category}/${item.num}`}
+                      >
+                        Description
+                      </Link>
+                    </button>
                   </div>
                   <div className={styles.rightCard}>
                     <div className={styles.addToCard}>
@@ -259,9 +310,14 @@ export class Navbar extends Component {
                           copyCounters.splice(index, 1);
                           copyCounters.splice(index, 0, newCount);
                           this.props.addQuantity(index, copyCounters);
-                          this.setState({
-                            counters: copyCounters,
-                          });
+                          this.setState(
+                            {
+                              counters: copyCounters,
+                              counter: newCount,
+                            },
+                            this.recalculateTotalSum()
+                          );
+                          this.props.addQuantity(index, copyCounters);
                         }}
                         alt=""
                       />
@@ -276,19 +332,41 @@ export class Navbar extends Component {
                             let newCount = copyCounters[index] - 1;
                             copyCounters.splice(index, 1);
                             copyCounters.splice(index, 0, newCount);
-                            this.props.addQuantity(index, copyCounters);
-                            this.setState({
-                              counters: copyCounters,
-                            });
+                            //   this.props.addQuantity(index, copyCounters);
+                            this.setState(
+                              {
+                                counters: copyCounters,
+                                counter: newCount,
+                              },
+                              this.recalculateTotalSum()
+                            );
+                            this.props.addQuantity(index, this.state.counters);
                           }
                         }}
+                        /*let copyCounters = this.state.counters;
+                            if (this.state.counters[index] > 1) {
+                              let newCount = this.state.counters[index] - 1;
+                              copyCounters.splice(index, 1);
+                              copyCounters.splice(index, 0, newCount);
+                              this.setState(
+                                {
+                                  counters: copyCounters,
+                                  counter: newCount,
+                                },
+                                this.recalculateTotalSum()
+                              );
+                              this.props.addQuantity(
+                                index,
+                                this.state.counters
+                              );
+                            } */
                         alt=""
                       />
                     </div>
                     <div className={styles.galleryPhotoWrapper}>
                       <img
                         className={styles.galleryPhoto}
-                        src={item.gallery}
+                        src={item.gallery[0]}
                         alt=""
                       />
                     </div>
@@ -328,7 +406,11 @@ const mapStateToProps = (state) => ({
   currency: state.myCurrencyReducer.currency,
   cart: state.cartReducer.cart,
   openedCart: state.toggleCartInMenuReducer.openedCart,
+  openedCurrencyList: state.toggleCurrencyListReducer.openedCurrencyList,
   quantityArray: state.cartReducer.quantityArray,
+  one: state.categoryListReducer.one,
+  oneTech: state.categoryListReducer.oneTech,
+  oneClothes: state.categoryListReducer.oneClothes,
 });
 let WithRouterNavbar = withRouter(Navbar);
 
@@ -338,4 +420,8 @@ export default connect(mapStateToProps, {
   addProduct,
   addQuantity,
   toggleCartInMenu,
+  getOne,
+  getOneTech,
+  getOneClothes,
+  toggleCurrencyMenu,
 })(WithRouterNavbar);

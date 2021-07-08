@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 //import Navbar from "./components/Navbar/Navbar";
 import WithRouterComponent from "./components/Navbar/Navbar";
 import { Switch, Route } from "react-router-dom";
@@ -9,7 +9,7 @@ import All from "./components/Categories/All";
 import ProductPage from "./components/Categories/ProductPage/ProductPage";
 import Cart from "./components/Categories/Cart/Cart";
 
-export class App extends Component {
+export class App extends PureComponent {
   render() {
     return (
       <div>
@@ -19,7 +19,7 @@ export class App extends Component {
           <Route path="/clothes" component={Clothes} />
           <Route path="/tech" component={Tech} />
           <Route exact path="/" component={All} />
-          <Route exact path="/one/:id" component={ProductPage} />
+          <Route exact path="/one/:id/:cat" component={ProductPage} />
           <Route path="/userCart" component={Cart} />
         </Switch>
       </div>

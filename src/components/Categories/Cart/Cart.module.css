@@ -1,18 +1,27 @@
+.container{
+  min-height: 100vh;
+
+}
 .wrapper {
   margin: 0 auto;
   max-width: 1440px;
   padding-left: 200px;
 }
+.wrapperOpenedCart {
+  min-height: 100vh;
+  background-color: rgba(57, 55, 72, 0.22);
+}
+
 h2 {
   max-width: 1440px;
-  font-family: Raleway;
+  font-family: 'Raleway-Bold';
   font-style: normal;
   font-weight: bold;
   font-size: 32px;
   line-height: 40px;
   text-transform: uppercase;
   color: #1d1f22;
-  margin-top:0;
+  margin-top: 0;
   padding-top: 30px;
 }
 .mainContent {
@@ -31,7 +40,7 @@ hr {
   padding: 0;
 }
 .mainContent__listItem__info {
-  font-family: Raleway;
+  font-family: 'Raleway-SemiBold';
   font-style: normal;
   font-weight: 600;
   font-size: 30px;
@@ -41,6 +50,16 @@ hr {
   color: #1d1f22;
   margin: 0;
   margin-top: 20px;
+}
+.mainContent__info__button_link{
+  font-family: Raleway;
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 120%;
+text-decoration: none;
+color: white;
+
 }
 .priceInfo {
   display: flex;
@@ -54,7 +73,7 @@ hr {
 }
 .priceInfo p {
   margin-top: 10px;
-  font-family: Raleway;
+  font-family: 'Raleway-Bold';
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
@@ -67,14 +86,13 @@ hr {
   display: flex;
   align-items: center;
 }
-.rightCart img {
-  width: 141px;
-}
+ 
 .plusMinus {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  margin-right: 12px;
 }
 .plusMinus__plus {
   width: 45px;
@@ -90,6 +108,12 @@ hr {
 .plusMinus p {
   display: flex;
   justify-content: center;
+  font-family: 'Raleway-Medium';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 160%;
+
 }
 .attributeListitem {
   display: flex;
@@ -102,28 +126,27 @@ hr {
   height: 45px;
   border: 1px solid #a6a6a6;
   box-sizing: border-box;
-
 }
 .attributeListitem__active {
-    display: flex;
-    margin-right: 12px;
-    justify-content: center;
-    align-items: center;
-    list-style-type: none;
-    width: 63px;
-    height: 45px;
-    background: #1d1f22;
-    border: 1px solid #1d1f22;
-    box-sizing: border-box;
-    font-family: Source Sans Pro;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 18px;
-    text-align: center;
-    letter-spacing: 0.05em;
-    color: #FFFFFF;
-  }
+  display: flex;
+  margin-right: 12px;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  width: 63px;
+  height: 45px;
+  background: #1d1f22;
+  border: 1px solid #1d1f22;
+  box-sizing: border-box;
+  font-family: 'SourceSansPro-Regular';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
 
 .attributeList {
   display: flex;
@@ -131,8 +154,9 @@ hr {
   padding-left: 0px;
 }
 .attributeName {
+  text-transform: uppercase;
   margin-bottom: 12px;
-  font-family: Roboto Condensed;
+  font-family: 'RobotoCondensed-Bold';
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -142,11 +166,10 @@ hr {
   text-align: center;
   color: #1d1f22;
 }
-.leftCart{
-    margin-bottom: 12px;
-   
+.leftCart {
+  margin-bottom: 12px;
 }
-.listOfAttributes{
+.listOfAttributes {
   margin-bottom: 12px;
 }
 .buttonRemove {
@@ -167,7 +190,80 @@ hr {
   color: #ffffff;
   cursor: pointer;
 }
-.listOfAttributes{
+.gallery {
+  width: 141px;
+ 
+  
+}
+.galleryInvisible{
+  width: 141px;
+  height: 235px;
+ 
+display: none;
+}
+.listOfAttributes {
   list-style-type: none;
   padding-left: 0;
+}
+.leftArrow {
+
+width: 20px;
+height: 20px;
+  z-index: 5;
+}
+.leftArrowBox{
+  display: flex;
+  align-items: center;
+}
+.rightArrow {
+  
+  width: 20px;
+  height: 20px;
+
+  z-index: 5;
+ 
+  
+}
+.rightArrowBox{
+  display: flex;
+  align-items: center;
+}
+
+.photosSlider{
+  display: flex;
+width: 190px;
+
+  overflow: hidden;
+  list-style-type: none;
+}
+.total {
+  display: flex;
+  justify-content: flex-start;
+ 
+}
+.totalSum {
+  text-transform: uppercase;
+  margin-right: 10px;
+  font-family: 'Raleway-Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 18px;
+  color: #1d1f22;
+
+}
+.totalAmount {
+  font-family: 'Raleway-Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 18px;
+  color: #1d1f22;
+  display: flex;
+}
+.totalAmount img {
+  width: 18px;
+  height: 18px;
+  margin-top: 19px;
+  margin-right: 2px;
 }

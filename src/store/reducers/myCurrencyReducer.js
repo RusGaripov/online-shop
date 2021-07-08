@@ -5,7 +5,7 @@ const initialState = {
   currency: 0,
 };
 
-export default (state = initialState, action) => {
+export function myCurrencyReducer(state = initialState, action) {
   switch (action.type) {
     case actions.ADD_PRODUCT:
       return { ...state, myCard: null };
@@ -16,4 +16,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}

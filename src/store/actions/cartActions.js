@@ -23,7 +23,6 @@ export const deleteProduct = (index) => async (dispatch) => {
 };
 
 export const addQuantity = (index, quantities) => async (dispatch) => {
-  console.log(index, quantities);
   dispatch({
     type: actions.ADD_QUANTITY,
     quantityArray: quantities,

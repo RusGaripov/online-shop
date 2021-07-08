@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-export class Product extends Component {
+export class Product extends PureComponent {
   render() {
     const { one } = this.props;
     return (

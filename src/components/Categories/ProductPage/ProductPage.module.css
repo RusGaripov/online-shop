@@ -1,11 +1,18 @@
+
 .wrapper {
   margin: 0 auto;
+  max-width: 1440px;
+  height: 100vh;
+
+}
+.wrapperOpenedCart {
+  background-color: rgba(57, 55, 72, 0.22);
 
 }
 .container {
   display: flex;
   justify-content: flex-start;
-  margin-top: 82px;
+  padding-top: 35px;
   margin-left: 100px;
   flex-wrap: wrap;
   display: flex;
@@ -45,7 +52,7 @@ max-width: 550px;
 .mainContent__info__name {
   width: 292px;
   margin-bottom: 0px;
-  font-family: Raleway;
+  font-family: 'Raleway-SemiBold';
   font-style: normal;
   font-weight: 600;
   font-size: 30px;
@@ -59,7 +66,7 @@ max-width: 550px;
   text-transform: uppercase;
   margin-top: 40px;
   margin-bottom: 0;
-  font-family: Roboto Condensed;
+  font-family: 'RobotoCondensed-Bold';
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -71,7 +78,7 @@ max-width: 550px;
 }
 .mainContent__info__price {
   margin-top: 10px;
-  font-family: Raleway;
+  font-family: 'Raleway-Bold';
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
@@ -88,7 +95,29 @@ max-width: 550px;
   justify-content: center;
   padding-top: 0px;
   background: #5ece7b;
-  font-family: Raleway;
+  font-family: 'Raleway-SemiBold';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.mainContent__info__button__outOfStock {
+  pointer-events: none;
+  opacity: 0.4;
+  width: 292px;
+  height: 52px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 0px;
+  background: #5ece7b;
+  font-family: 'Raleway-SemiBold';
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -102,7 +131,7 @@ max-width: 550px;
 
 .mainContent__info__description {
   margin-top: 40px;
-  font-family: Roboto;
+  font-family: 'Roboto-Regular';
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -137,6 +166,7 @@ max-width: 550px;
   justify-content: center;
   align-items: center;
   list-style-type: none;
+  font-family: 'SourceSansPro-Regular';
   width: 63px;
   height: 45px;
   border: 1px solid #a6a6a6;
@@ -154,7 +184,7 @@ max-width: 550px;
   background: #1d1f22;
   border: 1px solid #1d1f22;
   box-sizing: border-box;
-  font-family: Source Sans Pro;
+  font-family:'SourceSansPro-Regular';
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -184,8 +214,12 @@ max-width: 550px;
   color: #1d1f22;
 }
 .mainContent__info__button_link {
+  width: 292px;
+  height: 52px;
+  display: flex;
+ justify-content: center;
   text-decoration: none;
-  font-family: Raleway;
+  font-family: 'Raleway-SemiBold';
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
