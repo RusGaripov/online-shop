@@ -332,7 +332,6 @@ export class Navbar extends PureComponent {
                             let newCount = copyCounters[index] - 1;
                             copyCounters.splice(index, 1);
                             copyCounters.splice(index, 0, newCount);
-                            //   this.props.addQuantity(index, copyCounters);
                             this.setState(
                               {
                                 counters: copyCounters,
@@ -343,23 +342,6 @@ export class Navbar extends PureComponent {
                             this.props.addQuantity(index, this.state.counters);
                           }
                         }}
-                        /*let copyCounters = this.state.counters;
-                            if (this.state.counters[index] > 1) {
-                              let newCount = this.state.counters[index] - 1;
-                              copyCounters.splice(index, 1);
-                              copyCounters.splice(index, 0, newCount);
-                              this.setState(
-                                {
-                                  counters: copyCounters,
-                                  counter: newCount,
-                                },
-                                this.recalculateTotalSum()
-                              );
-                              this.props.addQuantity(
-                                index,
-                                this.state.counters
-                              );
-                            } */
                         alt=""
                       />
                     </div>
