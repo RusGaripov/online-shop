@@ -1,4 +1,4 @@
-@font-face {
+/*@font-face {
   font-family: 'Raleway-Bold';
   src: url('fonts/Raleway-Bold.ttf');
   font-family: 'Raleway-Black';
@@ -19,7 +19,8 @@
   src: url('fonts/Roboto-Regular.ttf');
   font-family: 'Roboto-Medium';
   src: url('fonts/Roboto-Medium.ttf');
-  }
+  +Roboto 700 !!!
+  }*/
 
 
 body {

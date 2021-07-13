@@ -1,19 +1,12 @@
 import React, { Component } from "react";
 import spinner from "./spinner.gif";
+import styles from "./Spinner.module.css";
 
 export class Spinner extends Component {
   render() {
     return (
       <div>
-        <img
-          src={spinner}
-          alt="Загрузка"
-          style={{
-            display: "block",
-            margin: "0 auto",
-            width: "200px",
-          }}
-        />
+        <img src={spinner} alt="Загрузка" className={styles.spinner} />
       </div>
     );
   }

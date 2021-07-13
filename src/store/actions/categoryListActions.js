@@ -38,6 +38,30 @@ const fetchDataListFailure = (error) => {
   };
 };
 
+const COMMON_QUERY_PART = `
+name
+products{
+  name 
+  inStock
+  gallery
+  description
+  category
+  attributes{
+    id
+    name
+    type
+    items{
+      displayValue
+      value
+      id
+    }
+  }
+  prices{
+    currency
+    amount
+  }
+}`;
+
 export const fetchDataList = () => {
   return function (dispatch) {
     dispatch(fetchDataListRequest());
@@ -48,27 +72,7 @@ export const fetchDataList = () => {
         query: `
         query {
           category{
-            products{
-              name 
-              inStock
-              gallery
-              description
-              category
-              attributes{
-                id
-                name
-                type
-                items{
-                  displayValue
-                  value
-                  id
-                }
-              }
-              prices{
-                currency
-                amount
-              }
-            }
+            ${COMMON_QUERY_PART}
           }
         } `,
       }),
@@ -95,28 +99,7 @@ export const fetchDataListTech = () => {
         query {
           category(input: {
             title:"tech"}){
-            name
-            products{
-              name 
-              inStock
-              gallery
-              description
-              category
-              attributes{
-                id
-                name
-                type
-                items{
-                  displayValue
-                  value
-                  id
-                }
-              }
-              prices{
-                currency
-                amount
-              }
-            }
+              ${COMMON_QUERY_PART}
           }
         } `,
       }),
@@ -143,28 +126,7 @@ export const fetchDataListClothes = () => {
         query {
           category(input: {
             title:"clothes"}){
-            name
-            products{
-              name 
-              inStock
-              gallery
-              description
-              category
-              attributes{
-                id
-                name
-                type
-                items{
-                  displayValue
-                  value
-                  id
-                }
-              }
-              prices{
-                currency
-                amount
-              }
-            }
+            ${COMMON_QUERY_PART}
           }
         } `,
       }),

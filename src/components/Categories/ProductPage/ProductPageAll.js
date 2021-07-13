@@ -34,6 +34,7 @@ export class ProductPage extends PureComponent {
       attributesId: [],
       addToCartObject: {},
       currentPhoto: 0,
+      counters: [],
     };
   }
   componentDidMount() {
@@ -57,12 +58,8 @@ export class ProductPage extends PureComponent {
         activeFilters: activeFilt,
         number: null,
         addToCartObject: {
-          name: this.props.one.name,
-          category: this.props.one.category,
+          ...this.props.one, //object desctructuring
           num: this.state.number,
-          prices: this.props.one.prices,
-          gallery: this.props.one.gallery,
-          attributes: this.props.one.attributes,
           activeFilters: activeFilt,
           quantity: 1,
           all: true,
@@ -82,9 +79,57 @@ export class ProductPage extends PureComponent {
       });
     }
   }
-  addToCart = () => {
+  /* addToCart = () => {
     if (!this.props.openedCart) {
-      this.props.addProduct(this.state.addToCartObject);
+      this.props.addProduct(
+        this.state.addToCartObject,
+        this.props.quantityArray
+      );
+    }
+  };*/
+  addToCart = () => {
+    let count = 0;
+    let b;
+    if (!this.props.openedCart) {
+      for (let i = 0; i < this.props.cart.length; i++) {
+        if (
+          JSON.stringify(this.props.cart[i].name) ===
+            JSON.stringify(this.state.addToCartObject.name) &&
+          JSON.stringify(this.props.cart[i].activeFilters) ===
+            JSON.stringify(this.state.addToCartObject.activeFilters)
+        ) {
+          console.log(
+            "ага",
+            this.props.cart[i].activeFilters,
+            this.state.addToCartObject.activeFilters
+          );
+          count += 1;
+          b = this.props.quantityArray;
+          let c = this.props.quantityArray[i];
+          b.splice(i, 1);
+          console.log(this.props.quantityArray[i]);
+          b.splice(i, 0, c + 1);
+        }
+      }
+      if (count === 0) {
+        this.props.addProduct(
+          this.state.addToCartObject,
+          this.props.quantityArray
+        );
+        console.log(
+          this.state.addToCartObject,
+          this.props.cart,
+          this.props.quantityArray
+        );
+        this.props.addQuantity(
+          1,
+          this.props.quantityArray,
+          this.state.addToCartObject
+        );
+      }
+      if (count === 1) {
+        this.props.addQuantity(1, b, this.state.addToCartObject);
+      }
     }
   };
   notAddToCart = () => {
@@ -125,11 +170,7 @@ export class ProductPage extends PureComponent {
             number: Number.parseInt(b),
             addToCartObject: {
               num: Number.parseInt(b),
-              name: this.props.one.name,
-              category: this.props.one.category,
-              prices: this.props.one.prices,
-              gallery: this.props.one.gallery,
-              attributes: this.props.one.attributes,
+              ...this.props.one, //object desctructuring
               activeFilters: activeFilt,
               quantity: 1,
               all: true,
@@ -141,6 +182,7 @@ export class ProductPage extends PureComponent {
   };
 
   render() {
+    console.log(this.props.quantityArray, this.props.one);
     if (this.props.one) {
       return (
         <div
@@ -175,12 +217,22 @@ export class ProductPage extends PureComponent {
               </ul>
 
               <div className={styles.mainContent}>
-                <div className={styles.currPhotoBox}>
+                <div
+                  className={
+                    this.props.one.inStock === true
+                      ? styles.currPhotoBox
+                      : styles.outOfStockBox
+                  }
+                >
                   <img
                     src={this.props.one.gallery[this.state.currentPhoto]}
                     alt="currentPhoto"
                   />
+                  {!this.props.one.inStock && (
+                    <span className={styles.outOfStockInfo}>Out of Stock</span>
+                  )}
                 </div>
+
                 <div className={styles.mainContent__info}>
                   <p className={styles.mainContent__info__name}>
                     {this.props.one.name}
@@ -215,7 +267,7 @@ export class ProductPage extends PureComponent {
                                     this.props.one.attributes[index].type ===
                                     "swatch"
                                       ? {
-                                          backgroundColor: itemValue.value,
+                                          backgroundColor: itemValue.value, //style here is not static
                                         }
                                       : null
                                   }
@@ -234,12 +286,8 @@ export class ProductPage extends PureComponent {
                                         activeFilters: items,
                                         attribute: item,
                                         addToCartObject: {
-                                          name: this.props.one.name,
-                                          category: this.props.one.category,
+                                          ...this.props.one, //object desctructuring
                                           num: this.state.number,
-                                          prices: this.props.one.prices,
-                                          gallery: this.props.one.gallery,
-                                          attributes: this.props.one.attributes,
                                           activeFilters: items,
                                           quantity: 1,
                                           all: true,
@@ -315,6 +363,7 @@ const mapStateToProps = (state) => ({
   quantityArray: state.cartReducer.quantityArray,
   openedCart: state.toggleCartInMenuReducer.openedCart,
   openedCurrencyList: state.toggleCurrencyListReducer.openedCurrencyList,
+  cart: state.cartReducer.cart,
 });
 export default connect(mapStateToProps, {
   getOne,

@@ -43,35 +43,11 @@ export class Cart extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.addProduct();
     this.setQuantitiesAndCurrency();
     this.recalculateTotalSum();
     this.setState({
       checkQuantityArray: this.state.quantityArray,
     });
-    /* let newCounters = [];
-    for (let i = 0; i < this.props.cart.length; i++) {
-      if (this.props.quantityArray && this.props.quantityArray[i]) {
-        newCounters.push(this.props.quantityArray[i]);
-      } else {
-        newCounters.push(1);
-      }
-    }
-    this.setState({
-      counters: newCounters,
-      cartContent: this.props.cart,
-    });
-
-    this.props.addQuantity(1, newCounters);
-
-    let numbers = [];
-    for (let i = 0; i < this.props.cart.length; i++) {
-      numbers.push(0);
-    }
-    this.setState({
-      num: numbers,
-      myCur: this.state.cur[this.props.currency],
-    });*/
   }
 
   componentDidUpdate() {
@@ -101,7 +77,34 @@ export class Cart extends PureComponent {
       myCur: this.state.cur[this.props.currency],
     });
 
-    this.props.addQuantity(1, newCounters);
+    this.props.addQuantity(1, newCounters); //?
+  };
+
+  setQuantitiesAndCurrencyDelete = (index) => {
+    console.log(index, this.props.quantityArray);
+
+    let newCounters = this.props.quantityArray;
+    newCounters.splice(index, 1);
+
+    // let newCounters = [];
+    let numbers = [];
+    for (let i = 0; i < this.props.cart.length; i++) {
+      numbers.push(0);
+      if (this.props.quantityArray && this.props.quantityArray[i]) {
+        //   newCounters.push(this.props.quantityArray[i]);
+        //   } else {
+        //    newCounters.push(1);
+      }
+    }
+    // console.log(newCounters);
+    this.setState({
+      counters: newCounters,
+      cartContent: this.props.cart,
+      num: numbers,
+      myCur: this.state.cur[this.props.currency],
+    });
+
+    this.props.addQuantity(2, newCounters);
   };
 
   recalculateTotalSum = () => {
@@ -193,7 +196,7 @@ export class Cart extends PureComponent {
                                         indexValue
                                       ].type === "swatch"
                                         ? {
-                                            backgroundColor: item.value,
+                                            backgroundColor: item.value, // style  here is not static
                                           }
                                         : null
                                     }
@@ -217,10 +220,17 @@ export class Cart extends PureComponent {
                           !this.props.openedCart &&
                           !this.props.openedCurrencyList
                         ) {
-                          this.props.deleteProduct(index);
-                          this.setState({
-                            cartContent: this.props.cart,
-                          });
+                          this.props.deleteProduct(
+                            index,
+                            this.props.quantityArray
+                          );
+                          this.setState(
+                            {
+                              cartContent: this.props.cart,
+                            },
+                            this.recalculateTotalSum()
+                          );
+                          this.setQuantitiesAndCurrencyDelete(index);
                         }
                       }}
                     >

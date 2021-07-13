@@ -4,6 +4,7 @@
   max-width: 1440px;
   position: relative;
 }
+
 .header {
   min-height: 80px;
   display: flex;
@@ -39,9 +40,9 @@
   height: 80px;
   display: flex;
   justify-content: center;
-  font-family: "Raleway-Regular";
+  font-family: 'Raleway', sans-serif;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 16px;
   line-height: 120%;
   display: flex;
@@ -56,6 +57,7 @@
   border-bottom: 2px solid #5ece7b;
   color: #5ece7b;
   font-family: "Raleway-SemiBold";
+  font-weight: 600;
 }
 
 .optionsIcons {
@@ -82,7 +84,7 @@
   padding-left: 16px;
   font-family: "Raleway-Bold";
   font-style: normal;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 16px;
   line-height: 160%;
   text-align: right;
@@ -94,7 +96,7 @@
   overflow-x: hidden;
   width: 325px;
   height: 350px;
-  font-family: "Raleway-Light";
+  font-family: 'Raleway', sans-serif;
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
@@ -202,9 +204,9 @@
   margin-bottom: 20px;
 }
 .totalSum {
-  font-family: "Roboto-Medium";
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 16px;
   line-height: 18px;
   color: #1d1f22;
@@ -237,7 +239,7 @@
 .currencyList__item {
   list-style-type: none;
   margin-bottom: 20px;
-  font-family: "Raleway-Medium";
+  font-family: 'Raleway', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -281,16 +283,16 @@
   color: #ffffff;
   display: inline-block;
   text-align: center;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 14px;
   line-height: 16px;
   text-transform: uppercase;
   padding-top: 2px;
 }
 .productName {
-  font-family: "Raleway-Light";
+  font-family: 'Raleway', sans-serif;
   font-style: normal;
   font-weight: 300;
 }
@@ -304,9 +306,9 @@
 }
 .productInfo p {
   margin-bottom: 0;
-  font-family: "Raleway-Medium";
+  font-family: 'Raleway', sans-serif;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 16px;
   line-height: 160%;
   text-align: right;
@@ -318,7 +320,7 @@
 }
 .attributes__item__name {
   margin-bottom: 0;
-  font-family: "Raleway-Light";
+  font-family: 'Raleway', sans-serif;
   font-style: normal;
   font-weight: 300;
   font-size: 16px;

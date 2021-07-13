@@ -17,6 +17,7 @@ import GBP from "../../images/GBP.png";
 import AUD from "../../images/AUD.png";
 import JPY from "../../images/JPY.png";
 import RUB from "../../images/RUB.png";
+import cart from "../../images/cart.png";
 import Spinner from "../Spinner/Spinner";
 
 export class Tech extends PureComponent {
@@ -69,14 +70,14 @@ export class Tech extends PureComponent {
     this.props.getOneTech(id);
   };
 
-  addToCart = () => {
+  /* addToCart = () => {
     this.props.addProduct(this.state.addToCartObject);
     if (this.props.quantityArray !== [1]) {
       let newArray = this.props.quantityArray;
       newArray.push(1);
       this.props.addQuantity(1, newArray);
     }
-  };
+  };*/
 
   render() {
     return (
@@ -154,36 +155,176 @@ export class Tech extends PureComponent {
                       </p>
                     </div>
                   </Link>
-                  {item.inStock && (
-                    <div
+                  {/*  {item.inStock && (
+                    <Link
+                      to={
+                        !this.props.openedCart && !this.props.openedCurrencyList
+                          ? `/userCart`
+                          : `/`
+                      }
                       className={styles.addToCart}
                       onClick={() => {
                         if (
                           !this.props.openedCart &&
                           !this.props.openedCurrencyList
                         ) {
-                          this.setState(
-                            {
-                              addToCartObject: {
-                                name: this.props.dataListTech[index].name,
-                                category:
-                                  this.props.dataListTech[index].category,
-                                //  num: index,
-                                prices: this.props.dataListTech[index].prices,
-                                gallery: this.props.dataListTech[index].gallery,
-                                attributes:
-                                  this.props.dataListTech[index].attributes,
-                                activeFilters: "",
+                          let a = [];
+                          for (let i = 0; i < item.attributes.length; i++) {
+                            a.push(0);
+                          }
+                        
+                       
+                          let count = 0;
+                          let b;
+
+                          for (let i = 0; i < this.props.cart.length; i++) {
+                            if (
+                              JSON.stringify(this.props.cart[i].name) ===
+                              JSON.stringify(item.name)
+                            ) {
+                              console.log("ага");
+                              count += 1;
+                              b = this.props.quantityArray;
+                              let c = this.props.quantityArray[i];
+                              b.splice(i, 1);
+                              console.log(this.props.quantityArray[i]);
+                              b.splice(i, 0, c + 1);
+                            }
+                          }
+                          if (count === 0) {
+                            this.props.addProduct(
+                              {
+                                ...item, // object desctructuring
+                                activeFilters: a,
                                 quantity: 1,
+                                all: false,
+                                num: index + 1,
                               },
-                            },
-                            this.addToCart
-                          );
+                              this.props.quantityArray
+                            );
+                            console.log(
+                              this.state.addToCartObject,
+                              this.props.cart,
+                              this.props.quantityArray
+                            );
+                            this.props.addQuantity(
+                              1,
+                              this.props.quantityArray,
+                              {
+                                ...item, // object desctructuring
+                                activeFilters: a,
+                                quantity: 1,
+                                all: false,
+                                num: index + 1,
+                              }
+                            );
+                          }
+                          if (count === 1) {
+                            this.props.addQuantity(
+                              1,
+                              b,
+                              this.state.addToCartObject
+                            );
+                          }
                         }
                       }}
                     >
                       Add to Cart
-                    </div>
+                    </Link>
+                  )}*/}
+                  {item.inStock && (
+                    <Link
+                      to={
+                        !this.props.openedCart && !this.props.openedCurrencyList
+                          ? `/userCart`
+                          : `/`
+                      }
+                      //  className={styles.addToCart}
+                      onClick={() => {
+                        if (
+                          !this.props.openedCart &&
+                          !this.props.openedCurrencyList
+                        ) {
+                          let a = [];
+                          for (let i = 0; i < item.attributes.length; i++) {
+                            a.push(0);
+                          }
+
+                          /*    this.props.addProduct(
+                            {
+                              ...item, // object desctructuring
+                              activeFilters: a,
+                              quantity: 1,
+                              all: false,
+                              num: index + 1,
+                            }
+                            //  this.props.quantityArray
+                          );*/
+
+                          /*     if (this.props.quantityArray !== [1]) {
+                            console.log(item, index, this.props.cart);
+                            let newArray = this.props.quantityArray;
+                            newArray.push(1);
+                            this.props.addQuantity(1, newArray);
+                          }*/
+
+                          let count = 0;
+                          let b;
+
+                          for (let i = 0; i < this.props.cart.length; i++) {
+                            if (
+                              JSON.stringify(this.props.cart[i].name) ===
+                              JSON.stringify(item.name)
+                            ) {
+                              console.log("ага");
+                              count += 1;
+                              b = this.props.quantityArray;
+                              let c = this.props.quantityArray[i];
+                              b.splice(i, 1);
+                              console.log(this.props.quantityArray[i]);
+                              b.splice(i, 0, c + 1);
+                            }
+                          }
+                          if (count === 0) {
+                            this.props.addProduct(
+                              {
+                                ...item, // object desctructuring
+                                activeFilters: a,
+                                quantity: 1,
+                                all: false,
+                                num: index + 1,
+                              },
+                              this.props.quantityArray
+                            );
+                            console.log(
+                              this.state.addToCartObject,
+                              this.props.cart,
+                              this.props.quantityArray
+                            );
+                            this.props.addQuantity(
+                              1,
+                              this.props.quantityArray,
+                              {
+                                ...item, // object desctructuring
+                                activeFilters: a,
+                                quantity: 1,
+                                all: false,
+                                num: index + 1,
+                              }
+                            );
+                          }
+                          if (count === 1) {
+                            this.props.addQuantity(
+                              1,
+                              b,
+                              this.state.addToCartObject
+                            );
+                          }
+                        }
+                      }}
+                    >
+                      <img src={cart} alt="cart" className={styles.cart} />
+                    </Link>
                   )}
                 </li>
               ))
@@ -209,6 +350,7 @@ const mapStateToProps = (state) => ({
   openedCart: state.toggleCartInMenuReducer.openedCart,
   openedCurrencyList: state.toggleCurrencyListReducer.openedCurrencyList,
   quantityArray: state.cartReducer.quantityArray,
+  cart: state.cartReducer.cart,
 });
 
 export default connect(mapStateToProps, {

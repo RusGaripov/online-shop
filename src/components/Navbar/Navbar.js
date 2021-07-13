@@ -24,6 +24,8 @@ import JPY from "../../images/JPY.png";
 import RUB from "../../images/RUB.png";
 import arrowDown from "../../images/arrowDown.svg";
 
+import CurrencyList from "./CurrencyList";
+
 export class Navbar extends PureComponent {
   constructor(props) {
     super(props);
@@ -91,22 +93,22 @@ export class Navbar extends PureComponent {
 
   /*Open and Close Currency List in the Navbar Component */
 
-  handleClickCurrencyList = () => {
+  /*handleClickCurrencyList = () => {
     if (this.props.openedCurrencyList === true) {
       this.props.toggleCurrencyMenu(false);
     } else {
       this.props.toggleCurrencyMenu(true);
     }
-  };
+  };*/
 
   /*Choose currency in the Currency List */
 
-  handleClickCurrency = (e) => {
+  /* handleClickCurrency = (e) => {
     this.props.getCurrency(e.target.getAttribute("value"));
     this.setState({
       choosenCurrency: e.target.getAttribute("value"),
     });
-  };
+  };*/
 
   recalculateTotalSum = () => {
     let sum = 0;
@@ -128,7 +130,17 @@ export class Navbar extends PureComponent {
   render() {
     return (
       <div className={styles.wrapper}>
-        <div className={styles.header}>
+        <div
+          className={styles.header}
+          onClick={(event) => {
+            if (this.props.openedCart) {
+              this.props.toggleCartInMenu(false);
+            }
+            if (this.props.openedCurrencyList) {
+              this.props.toggleCurrencyMenu(false);
+            }
+          }}
+        >
           <nav>
             <ul className={styles.nav}>
               {this.state.array !== []
@@ -164,7 +176,8 @@ export class Navbar extends PureComponent {
             src={goBack}
             alt="goBack"
           />
-          <div className={styles.optionsIcons}>
+          <CurrencyList />
+          {/* <div className={styles.optionsIcons}>
             <div
               onClick={this.handleClickCurrencyList}
               className={styles.choiceOfCurrency}
@@ -203,12 +216,19 @@ export class Navbar extends PureComponent {
             )}
             <div className={styles.cardBox} onClick={this.handleClick}>
               <img className={styles.cardIcon} src={cardIcon} alt="cardIcon" />
-              {this.props.openedCart ? (
+              {this.props.cart.length > 0 ? (
                 <p className={styles.myBagItem}>{this.props.cart.length}</p>
               ) : null}
             </div>
+          </div>*/}
+          <div className={styles.cardBox} onClick={this.handleClick}>
+            <img className={styles.cardIcon} src={cardIcon} alt="cardIcon" />
+            {this.props.cart.length > 0 ? (
+              <p className={styles.myBagItem}>{this.props.cart.length}</p>
+            ) : null}
           </div>
         </div>
+
         {this.props.openedCart && (
           <div className={styles.myCard}>
             <h5>
@@ -252,12 +272,12 @@ export class Navbar extends PureComponent {
                                   this.props.cart[index].attributes[indexValue]
                                     .type === "swatch"
                                     ? {
-                                        backgroundColor: item2.value,
+                                        backgroundColor: item2.value, //style here is not static
                                       }
                                     : item.activeFilters[indexValue] !== index2
                                     ? {
                                         opacity: "0.3",
-                                        backgroundColor: "#A6A6A6",
+                                        backgroundColor: "#A6A6A6", // style here is a part of Conditional (Ternary) Operator
                                       }
                                     : null
                                 }

@@ -41,6 +41,14 @@
   width: 610px;
   height: 511px;
 }
+.outOfStockBox {
+  opacity: 0.5;
+  width: 610px;
+  height: 511px;
+ 
+  position: relative;
+}
+
 .mainContent img {
 max-width: 550px;
   margin-right: 125px;
@@ -66,9 +74,9 @@ max-width: 550px;
   text-transform: uppercase;
   margin-top: 40px;
   margin-bottom: 0;
-  font-family: 'RobotoCondensed-Bold';
+  font-family: 'Roboto Condensed', sans-serif;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 18px;
   line-height: 18px;
   display: flex;
@@ -80,7 +88,7 @@ max-width: 550px;
   margin-top: 10px;
   font-family: 'Raleway-Bold';
   font-style: normal;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 24px;
   line-height: 18px;
   display: flex;
@@ -131,9 +139,9 @@ max-width: 550px;
 
 .mainContent__info__description {
   margin-top: 40px;
-  font-family: 'Roboto-Regular';
+  font-family: 'Raleway', sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 159.96%;
   color: #1d1f22;
@@ -166,7 +174,8 @@ max-width: 550px;
   justify-content: center;
   align-items: center;
   list-style-type: none;
-  font-family: 'SourceSansPro-Regular';
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
   width: 63px;
   height: 45px;
   border: 1px solid #a6a6a6;
@@ -184,9 +193,9 @@ max-width: 550px;
   background: #1d1f22;
   border: 1px solid #1d1f22;
   box-sizing: border-box;
-  font-family:'SourceSansPro-Regular';
+  font-family: 'Source Sans Pro', sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 18px;
   text-align: center;
@@ -202,9 +211,9 @@ max-width: 550px;
   margin-top: 0px;
   margin-bottom: 8px;
   text-transform: uppercase;
-  font-family: Roboto Condensed;
+  font-family: 'Roboto Condensed', sans-serif;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 18px;
   line-height: 18px;
   display: flex;
@@ -230,3 +239,21 @@ max-width: 550px;
   text-transform: uppercase;
   color: #ffffff;
 }
+.outOfStockInfo{
+    position: absolute;
+    text-transform: uppercase;
+    width: 173px;
+    height: 40px;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 160%;
+    display: flex;
+    align-items: center;
+    color: #8d8f9a;
+    top: 50%;
+    right: 50%;
+  
+}
+

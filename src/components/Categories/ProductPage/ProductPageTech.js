@@ -55,11 +55,7 @@ export class ProductPage extends PureComponent {
         activeFilters: activeFilt,
         number: null,
         addToCartObject: {
-          name: this.props.oneTech.name,
-          category: this.props.oneTech.category,
-          prices: this.props.oneTech.prices,
-          gallery: this.props.oneTech.gallery,
-          attributes: this.props.oneTech.attributes,
+          ...this.props.oneTech,
           activeFilters: activeFilt,
           num: this.state.number,
           quantity: 1,
@@ -79,9 +75,53 @@ export class ProductPage extends PureComponent {
       });
     }
   }
-  addToCart = () => {
+  /* addToCart = () => {
     if (!this.props.openedCart) {
-      this.props.addProduct(this.state.addToCartObject);
+      this.props.addProduct(
+        this.state.addToCartObject,
+        this.props.quantityArray
+      );
+    }
+  };*/
+  addToCart = () => {
+    let count = 0;
+    let b;
+    if (!this.props.openedCart) {
+      for (let i = 0; i < this.props.cart.length; i++) {
+        if (
+          JSON.stringify(this.props.cart[i].name) ===
+            JSON.stringify(this.state.addToCartObject.name) &&
+          JSON.stringify(this.props.cart[i].activeFilters) ===
+            JSON.stringify(this.state.addToCartObject.activeFilters)
+        ) {
+          console.log("ага");
+          count += 1;
+          b = this.props.quantityArray;
+          let c = this.props.quantityArray[i];
+          b.splice(i, 1);
+          console.log(this.props.quantityArray[i]);
+          b.splice(i, 0, c + 1);
+        }
+      }
+      if (count === 0) {
+        this.props.addProduct(
+          this.state.addToCartObject,
+          this.props.quantityArray
+        );
+        console.log(
+          this.state.addToCartObject,
+          this.props.cart,
+          this.props.quantityArray
+        );
+        this.props.addQuantity(
+          1,
+          this.props.quantityArray,
+          this.state.addToCartObject
+        );
+      }
+      if (count === 1) {
+        this.props.addQuantity(1, b, this.state.addToCartObject);
+      }
     }
   };
   notAddToCart = () => {
@@ -122,12 +162,8 @@ export class ProductPage extends PureComponent {
             activeFilters: activeFilt,
             number: Number.parseInt(b),
             addToCartObject: {
+              ...this.props.oneTech,
               num: Number.parseInt(b),
-              name: this.props.oneTech.name,
-              category: this.props.oneTech.category,
-              prices: this.props.oneTech.prices,
-              gallery: this.props.oneTech.gallery,
-              attributes: this.props.oneTech.attributes,
               activeFilters: activeFilt,
               quantity: 1,
               all: false,
@@ -173,11 +209,20 @@ export class ProductPage extends PureComponent {
               </ul>
 
               <div className={styles.mainContent}>
-                <div className={styles.currPhotoBox}>
+                <div
+                  className={
+                    this.props.oneTech.inStock === true
+                      ? styles.currPhotoBox
+                      : styles.outOfStockBox
+                  }
+                >
                   <img
                     src={this.props.oneTech.gallery[this.state.currentPhoto]}
                     alt="currentPhoto"
                   />
+                  {!this.props.oneTech.inStock && (
+                    <span className={styles.outOfStockInfo}>Out of Stock</span>
+                  )}
                 </div>
                 <div className={styles.mainContent__info}>
                   <p className={styles.mainContent__info__name}>
@@ -213,7 +258,7 @@ export class ProductPage extends PureComponent {
                                     this.props.oneTech.attributes[index]
                                       .type === "swatch"
                                       ? {
-                                          backgroundColor: itemValue.value,
+                                          backgroundColor: itemValue.value, //style here is not static
                                         }
                                       : null
                                   }
@@ -234,13 +279,8 @@ export class ProductPage extends PureComponent {
                                         activeFilters: items,
                                         attribute: item,
                                         addToCartObject: {
-                                          name: this.props.oneTech.name,
-                                          category: this.props.oneTech.category,
+                                          ...this.props.oneTech,
                                           num: this.state.number,
-                                          prices: this.props.oneTech.prices,
-                                          gallery: this.props.oneTech.gallery,
-                                          attributes:
-                                            this.props.oneTech.attributes,
                                           activeFilters: items,
                                           quantity: 1,
                                           all: false,
@@ -316,6 +356,7 @@ const mapStateToProps = (state) => ({
   quantityArray: state.cartReducer.quantityArray,
   openedCart: state.toggleCartInMenuReducer.openedCart,
   openedCurrencyList: state.toggleCurrencyListReducer.openedCurrencyList,
+  cart: state.cartReducer.cart,
 });
 export default connect(mapStateToProps, {
   getOne,

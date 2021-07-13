@@ -3,13 +3,18 @@ import styles from "./Categories.module.css";
 import { connect } from "react-redux";
 import { fetchDataList, getOne } from "../../store/actions/categoryListActions";
 import { getCurrency } from "../../store/actions/myCurrencyActions";
-import { addProduct, addQuantity } from "../../store/actions/cartActions";
+import {
+  addProduct,
+  addQuantity,
+  deleteProduct,
+} from "../../store/actions/cartActions";
 import { Link } from "react-router-dom";
 import USD from "../../images/USD.png";
 import GBP from "../../images/GBP.png";
 import AUD from "../../images/AUD.png";
 import JPY from "../../images/JPY.png";
 import RUB from "../../images/RUB.png";
+import cart from "../../images/cart.png";
 import { toggleCartInMenu } from "../../store/actions/toggleCartInMenuActions";
 import { toggleCurrencyMenu } from "../../store/actions/toggleCurrencyMenuActions";
 import Spinner from "../Spinner/Spinner";
@@ -48,14 +53,14 @@ export class All extends PureComponent {
     if (this.props.openedCart) console.log("");
   }
 
-  addToCart = (e) => {
-    this.props.addProduct(this.state.addToCartObject);
+  /* addToCart = (e) => {
+    // this.props.addProduct(this.state.addToCartObject);
     if (this.props.quantityArray !== [1]) {
       let newArray = this.props.quantityArray;
       newArray.push(1);
       this.props.addQuantity(1, newArray);
     }
-  };
+  };*/
 
   render() {
     return (
@@ -135,35 +140,171 @@ export class All extends PureComponent {
                       </p>
                     </div>
                   </Link>
-                  {item.inStock && (
-                    <div
+                  {/*  {item.inStock && (
+                    <Link
                       className={styles.addToCart}
+                      to={
+                        !this.props.openedCart && !this.props.openedCurrencyList
+                          ? `/userCart`
+                          : `/`
+                      }
                       onClick={() => {
                         if (
                           !this.props.openedCart &&
                           !this.props.openedCurrencyList
                         ) {
-                          this.setState(
+                          console.log(item.name);
+                        }
+                        let a = [];
+                        for (let i = 0; i < item.attributes.length; i++) {
+                          a.push(0);
+                        }
+                        let count = 0;
+                        let b;
+
+                        for (let i = 0; i < this.props.cart.length; i++) {
+                          if (
+                            JSON.stringify(this.props.cart[i].name) ===
+                            JSON.stringify(item.name)
+                          ) {
+                            console.log("ага");
+                            count += 1;
+                            b = this.props.quantityArray;
+                            let c = this.props.quantityArray[i];
+                            b.splice(i, 1);
+                            console.log(this.props.quantityArray[i]);
+                            b.splice(i, 0, c + 1);
+                          }
+                        }
+                        if (count === 0) {
+                          this.props.addProduct(
                             {
-                              addToCartObject: {
-                                name: this.props.dataList[index].name,
-                                category: this.props.dataList[index].category,
-                                num: index,
-                                prices: this.props.dataList[index].prices,
-                                gallery: this.props.dataList[index].gallery,
-                                attributes:
-                                  this.props.dataList[index].attributes,
-                                activeFilters: "",
-                                quantity: 1,
-                              },
+                              ...item, // object desctructuring
+                              activeFilters: a,
+                              quantity: 1,
+                              all: false,
+                              num: index + 1,
                             },
-                            this.addToCart
+                            this.props.quantityArray
+                          );
+                          console.log(
+                            this.state.addToCartObject,
+                            this.props.cart,
+                            this.props.quantityArray
+                          );
+                          this.props.addQuantity(1, this.props.quantityArray, {
+                            ...item, // object desctructuring
+                            activeFilters: a,
+                            quantity: 1,
+                            all: false,
+                            num: index + 1,
+                          });
+                        }
+                        if (count === 1) {
+                          this.props.addQuantity(
+                            1,
+                            b,
+                            this.state.addToCartObject
                           );
                         }
                       }}
                     >
                       Add to Cart
-                    </div>
+                    </Link>
+                    )}*/}
+                  {item.inStock && (
+                    <Link
+                      to={
+                        !this.props.openedCart && !this.props.openedCurrencyList
+                          ? `/userCart`
+                          : `/`
+                      }
+                      //  className={styles.addToCart}
+                      onClick={() => {
+                        if (
+                          !this.props.openedCart &&
+                          !this.props.openedCurrencyList
+                        ) {
+                          let a = [];
+                          for (let i = 0; i < item.attributes.length; i++) {
+                            a.push(0);
+                          }
+
+                          /*    this.props.addProduct(
+                            {
+                              ...item, // object desctructuring
+                              activeFilters: a,
+                              quantity: 1,
+                              all: false,
+                              num: index + 1,
+                            }
+                            //  this.props.quantityArray
+                          );*/
+
+                          /*     if (this.props.quantityArray !== [1]) {
+                            console.log(item, index, this.props.cart);
+                            let newArray = this.props.quantityArray;
+                            newArray.push(1);
+                            this.props.addQuantity(1, newArray);
+                          }*/
+
+                          let count = 0;
+                          let b;
+
+                          for (let i = 0; i < this.props.cart.length; i++) {
+                            if (
+                              JSON.stringify(this.props.cart[i].name) ===
+                              JSON.stringify(item.name)
+                            ) {
+                              console.log("ага");
+                              count += 1;
+                              b = this.props.quantityArray;
+                              let c = this.props.quantityArray[i];
+                              b.splice(i, 1);
+                              console.log(this.props.quantityArray[i]);
+                              b.splice(i, 0, c + 1);
+                            }
+                          }
+                          if (count === 0) {
+                            this.props.addProduct(
+                              {
+                                ...item, // object desctructuring
+                                activeFilters: a,
+                                quantity: 1,
+                                all: false,
+                                num: index + 1,
+                              },
+                              this.props.quantityArray
+                            );
+                            console.log(
+                              this.state.addToCartObject,
+                              this.props.cart,
+                              this.props.quantityArray
+                            );
+                            this.props.addQuantity(
+                              1,
+                              this.props.quantityArray,
+                              {
+                                ...item, // object desctructuring
+                                activeFilters: a,
+                                quantity: 1,
+                                all: false,
+                                num: index + 1,
+                              }
+                            );
+                          }
+                          if (count === 1) {
+                            this.props.addQuantity(
+                              1,
+                              b,
+                              this.state.addToCartObject
+                            );
+                          }
+                        }
+                      }}
+                    >
+                      <img src={cart} alt="cart" className={styles.cart} />
+                    </Link>
                   )}
                 </li>
               ))
@@ -182,6 +323,7 @@ export class All extends PureComponent {
 
 const mapStateToProps = (state) => ({
   dataList: state.categoryListReducer.dataList,
+  cart: state.cartReducer.cart,
   one: state.categoryListReducer.one,
   currency: state.myCurrencyReducer.currency,
   openedCart: state.toggleCartInMenuReducer.openedCart,
@@ -197,4 +339,5 @@ export default connect(mapStateToProps, {
   toggleCurrencyMenu,
   addProduct,
   addQuantity,
+  deleteProduct,
 })(All);
