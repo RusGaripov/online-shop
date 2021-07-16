@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import styles from "./Navbar.module.css";
 import arrowDown from "../../images/arrowDown.svg";
 import USD from "../../images/USD.png";
@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { toggleCurrencyMenu } from "../../store/actions/toggleCurrencyMenuActions";
 import { getCurrency } from "../../store/actions/myCurrencyActions";
 
-export class CurrencyList extends Component {
+export class CurrencyList extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

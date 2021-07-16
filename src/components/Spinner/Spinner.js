@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import spinner from "./spinner.gif";
 import styles from "./Spinner.module.css";
 
-export class Spinner extends Component {
+export class Spinner extends PureComponent {
   render() {
     return (
       <div>
