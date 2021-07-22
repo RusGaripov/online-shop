@@ -16,7 +16,11 @@ export class LinkTechToProductPage extends PureComponent {
         }
       >
         <img
-          className={styles.listItem__image}
+          className={
+            this.props.openedCart || this.props.openedCurrencyList === true
+              ? styles.listItem__image__back
+              : styles.listItem__image
+          }
           src={this.props.item.gallery[0]}
           alt=""
         />

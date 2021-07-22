@@ -9,7 +9,6 @@ export class LinkClothesToProductPage extends PureComponent {
       <Link
         className={styles.link}
         value={this.props.index}
-        //   to={`/one/${item.name}}`}
         to={
           !this.props.openedCart && !this.props.openedCurrencyList
             ? `/one/${this.props.item.category}/${this.props.index + 1}`
@@ -17,7 +16,11 @@ export class LinkClothesToProductPage extends PureComponent {
         }
       >
         <img
-          className={styles.listItem__image}
+          className={
+            this.props.openedCart || this.props.openedCurrencyList === true
+              ? styles.listItem__image__back
+              : styles.listItem__image
+          }
           src={this.props.item.gallery[0]}
           alt="image3"
         />

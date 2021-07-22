@@ -1,7 +1,7 @@
 import * as actions from "../actions";
 
 const initialState = {
-  openedCart: "",
+  openedCart: false,
 };
 
 export function toggleCartInMenuReducer(state = initialState, action) {

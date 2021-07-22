@@ -5,10 +5,10 @@ import {
   getOneClothes,
 } from "../../../store/actions/categoryListActions";
 import { connect } from "react-redux";
-import Spinner from "../../Spinner/Spinner";
 import ProductPageAll from "./ProductPageAll";
 import ProductPageClothes from "./ProductPageClothes";
 import ProductPageTech from "./ProductPageTech";
+import { Redirect } from "react-router-dom";
 
 export class ProductPage extends PureComponent {
   render() {
@@ -23,7 +23,7 @@ export class ProductPage extends PureComponent {
     if (this.props.oneClothes) {
       return <ProductPageClothes pathname={this.props.location.pathname} />;
     }
-    return <Spinner />;
+    return <Redirect to="/" />;
   }
 }
 

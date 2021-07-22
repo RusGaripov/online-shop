@@ -3,6 +3,7 @@ import cardIcon from "../../images/cardIcon.png";
 import styles from "./Navbar.module.css";
 import { connect } from "react-redux";
 import { toggleCartInMenu } from "../../store/actions/toggleCartInMenuActions";
+import { addProduct, addQuantity } from "../../store/actions/cartActions";
 import { Link } from "react-router-dom";
 import USD from "../../images/USD.png";
 import GBP from "../../images/GBP.png";
@@ -29,6 +30,7 @@ export class CartOverlay extends PureComponent {
       choosenCurrency: this.props.currency,
       counters: this.props.quantityArray,
       myCur: this.state.curSymbols[this.props.currency],
+      isRendered: false,
     });
   }
 
@@ -51,9 +53,10 @@ export class CartOverlay extends PureComponent {
   };
 
   handleClick = () => {
-    if (this.props.openedCart === true) {
-      this.props.toggleCartInMenu(false);
-    } else {
+    if (
+      this.props.openedCart === false &&
+      this.props.openedCurrencyList === false
+    ) {
       let sum = 0;
       for (let i = 0; i < this.props.cart.length; i++) {
         sum +=
@@ -65,6 +68,8 @@ export class CartOverlay extends PureComponent {
         myCard: true,
         totalSum: sum,
       });
+    } else {
+      this.props.toggleCartInMenu(false);
     }
 
     this.setState({
@@ -86,13 +91,14 @@ export class CartOverlay extends PureComponent {
         <div className={styles.cardBox} onClick={this.handleClick}>
           <img className={styles.cardIcon} src={cardIcon} alt="cardIcon" />
           {this.props.cart.length > 0 ? (
-            <p className={styles.myBagItem}>{this.props.cart.length}</p>
+            <p className={styles.myBagItem}> {this.props.cart.length} </p>
           ) : null}
         </div>
         {this.props.openedCart && (
           <div className={styles.myCard}>
             <h5>
-              <span>My Bag </span>, {this.state.items} items
+              <span> My Bag &nbsp; </span>
+              {this.state.items} items
             </h5>
 
             <CartOverlayProducts
@@ -131,6 +137,7 @@ export class CartOverlay extends PureComponent {
 
 const mapStateToProps = (state) => ({
   openedCart: state.toggleCartInMenuReducer.openedCart,
+  openedCurrencyList: state.toggleCurrencyListReducer.openedCurrencyList,
   cart: state.cartReducer.cart,
   quantityArray: state.cartReducer.quantityArray,
   currency: state.myCurrencyReducer.currency,
@@ -138,4 +145,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   toggleCartInMenu,
+  addQuantity,
+  addProduct,
 })(CartOverlay);

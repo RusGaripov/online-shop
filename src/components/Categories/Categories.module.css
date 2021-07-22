@@ -38,6 +38,8 @@
   margin-left: 40px;
   margin-bottom: 100px;
   position: relative;
+  z-index: 100;
+
   /* background: #ffffff;*/
 }
 .outOfStock {
@@ -55,6 +57,15 @@
   background-color: rgba(57, 55, 72, 0.22);
   max-width: 356px;
   height: 330px;
+ 
+}
+
+.listItem__image__back,
+.outOfStock__image__back {
+  background-color: rgba(57, 55, 72, 0.22);
+  max-width: 356px;
+  height: 330px;
+  filter: opacity(20%);
 }
 
 .listItem h3,
@@ -79,6 +90,7 @@
   margin-top: 0;
   padding-top: 0;
   font-style: normal;
+  font-family: 'Raleway', sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 160%;
@@ -108,8 +120,9 @@
 }
 .currency {
   margin-left: 0;
-  font-family: "Raleway-Medium";
+  font-family: 'Raleway', sans-serif;
   font-weight: 500;
+  color:#1D1F22
 }
 .currencySymbol {
   height: 24px !important;
@@ -118,6 +131,7 @@
 }
 .priceHeader {
   display: flex;
+  color:#1D1F22;
 }
 .spinner {
   display: "flex";
@@ -128,7 +142,7 @@
   width: 100px;
   height: 23px;
   background: #5ece7b;
-  font-family: "Raleway-SemiBold";
+  font-family: 'Raleway', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
@@ -149,4 +163,12 @@
   position: absolute;
   top: 65%;
   right: 15%;
+  cursor: pointer;
+}
+
+.cart__back {
+  position: absolute;
+  top: 65%;
+  right: 15%;
+  filter: opacity(20%);
 }

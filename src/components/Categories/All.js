@@ -104,6 +104,7 @@ export class All extends PureComponent {
                     addToCartObject={this.state.addToCartObject}
                     openedCart={this.props.openedCart}
                     openedCurrencyList={this.props.openedCurrencyList}
+                    toggleCartInMenu={this.props.toggleCartInMenu}
                   />
                 </li>
               ))

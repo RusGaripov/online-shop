@@ -19,7 +19,7 @@ export class Navbar extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.history.push("/");
+    // this.props.history.push("/");
   }
 
   render() {
@@ -86,6 +86,9 @@ export class Navbar extends PureComponent {
 
 const mapStateToProps = (state) => ({
   cart: state.cartReducer.cart,
+  openedCart: state.toggleCartInMenuReducer.openedCart,
+  openedCurrencyList: state.toggleCurrencyListReducer.openedCurrencyList,
+  quantityArray: state.cartReducer.quantityArray,
 });
 let WithRouterNavbar = withRouter(Navbar);
 

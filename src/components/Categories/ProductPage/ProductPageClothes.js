@@ -44,6 +44,7 @@ export class ProductPage extends PureComponent {
   }
 
   render() {
+    console.log(this.props.oneClothes, "рр");
     if (this.props.oneClothes) {
       return (
         <div

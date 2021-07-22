@@ -8,6 +8,7 @@ import JPY from "../../images/JPY.png";
 import RUB from "../../images/RUB.png";
 import { connect } from "react-redux";
 import { toggleCurrencyMenu } from "../../store/actions/toggleCurrencyMenuActions";
+import { toggleCartInMenu } from "../../store/actions/toggleCartInMenuActions";
 import { getCurrency } from "../../store/actions/myCurrencyActions";
 
 export class CurrencyList extends PureComponent {
@@ -20,10 +21,13 @@ export class CurrencyList extends PureComponent {
     };
   }
   handleClickCurrencyList = () => {
-    if (this.props.openedCurrencyList === true) {
-      this.props.toggleCurrencyMenu(false);
-    } else {
+    if (
+      this.props.openedCurrencyList === false &&
+      this.props.openedCart === false
+    ) {
       this.props.toggleCurrencyMenu(true);
+    } else {
+      this.props.toggleCurrencyMenu(false);
     }
   };
   handleClickCurrency = (e) => {
@@ -31,6 +35,7 @@ export class CurrencyList extends PureComponent {
     this.setState({
       choosenCurrency: e.target.getAttribute("value"),
     });
+    this.props.toggleCurrencyMenu(false);
   };
 
   render() {
@@ -76,9 +81,11 @@ export class CurrencyList extends PureComponent {
 const mapStateToProps = (state) => ({
   currency: state.myCurrencyReducer.currency,
   openedCurrencyList: state.toggleCurrencyListReducer.openedCurrencyList,
+  openedCart: state.toggleCartInMenuReducer.openedCart,
 });
 
 export default connect(mapStateToProps, {
   toggleCurrencyMenu,
+  toggleCartInMenu,
   getCurrency,
 })(CurrencyList);
